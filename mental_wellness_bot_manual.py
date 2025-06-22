@@ -1,5 +1,31 @@
 """# Frontend deployment using Streamlit"""
 
+import streamlit as st
+
+# Simple user store
+USER_CREDENTIALS = {
+    "harika": "mypassword",
+    "admin": "admin123"
+}
+
+def login():
+    st.title("🔒 Login to Mental Wellness Chatbot")
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+    if st.button("Login"):
+        if username in USER_CREDENTIALS and USER_CREDENTIALS[username] == password:
+            st.session_state["logged_in"] = True
+            st.success(f"Welcome, {username}!")
+        else:
+            st.error("Invalid credentials")
+
+if "logged_in" not in st.session_state:
+    login()
+else:
+    st.success("You're logged in!")
+
+username = st.secrets["auth"]["username1"]
+
 #removing pip install due to error in in streamlit
 import streamlit as st
 
