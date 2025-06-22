@@ -1,0 +1,11 @@
+streamlit
+openai
+transformers
+pandas
+scikit-learn
+numpy
+joblib
+seaborn
+altair
+neattext
+scikit-learn
