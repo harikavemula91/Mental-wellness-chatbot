@@ -43,7 +43,7 @@ sns.countplot(df_train['emotion'])
 
 """# Data Preprocessing"""
 
-!pip install neattext
+#removing pip install due to error in in streamlit
 import neattext.functions as nfx
 
 df_train['statement'] = df_train['statement'].apply(nfx.remove_stopwords)
@@ -88,7 +88,7 @@ pipeline_file.close()
 
 """# Frontend deployment using Streamlit"""
 
-!pip install streamlit
+#removing pip install due to error in in streamlit
 import streamlit as st
 
 import altair as alt
