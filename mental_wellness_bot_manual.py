@@ -49,7 +49,7 @@ username = st.secrets["auth"]["username1"]
 
 #removing pip install due to error in in streamlit
 import streamlit as st
-
+import joblib as joblib
 import altair as alt
 
 pipe_lr = joblib.load(open("text_emotion.pkl", "rb"))
