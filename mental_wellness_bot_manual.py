@@ -2,27 +2,48 @@
 
 import streamlit as st
 
-# Simple user store
-USER_CREDENTIALS = {
-    "harika": "mypassword",
-    "admin": "admin123"
-}
+# --- Setup a basic user store (in memory for now) ---
+if "users" not in st.session_state:
+    st.session_state["users"] = {
+        "harika": "12345",
+	"admin": "admin123"  # default user
+    }
 
-def login():
-    st.title("🔒 Login to Mental Wellness Chatbot")
+if "authenticated" not in st.session_state:
+    st.session_state["authenticated"] = False
+
+# --- Page Selection ---
+auth_mode = st.sidebar.selectbox("Choose", ["Login", "Sign Up"])
+
+# --- Login Page ---
+if auth_mode == "Login":
+    st.title("🔐 Login to Mental Wellness Chatbot")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
-        if username in USER_CREDENTIALS and USER_CREDENTIALS[username] == password:
-            st.session_state["logged_in"] = True
-            st.success(f"Welcome, {username}!")
+        users = st.session_state["users"]
+        if username in users and users[username] == password:
+            st.session_state["authenticated"] = True
+            st.success(f"Welcome back, {username}!")
         else:
             st.error("Invalid credentials")
 
-if "logged_in" not in st.session_state:
-    login()
-else:
-    st.success("You're logged in!")
+# --- Sign Up Page ---
+if auth_mode == "Sign Up":
+    st.title("📝 Create Your Account")
+    new_username = st.text_input("Choose a Username")
+    new_password = st.text_input("Choose a Password", type="password")
+    if st.button("Sign Up"):
+        if new_username in st.session_state["users"]:
+            st.warning("Username already exists. Try a different one.")
+        else:
+            st.session_state["users"][new_username] = new_password
+            st.success("Account created! Please go to the Login page.")
+
+# --- If Authenticated, Show Chatbot ---
+if st.session_state["authenticated"]:
+    st.title("🧠 Welcome to PunniBot")
+    st.write("You're now logged in.")
 
 username = st.secrets["auth"]["username1"]
 
