@@ -44,6 +44,7 @@ if auth_mode == "Sign Up":
 if st.session_state["authenticated"]:
     st.title("🧠 Welcome to PunniBot")
     st.write("You're now logged in.")
+	main()
 
 username = st.secrets["auth"]["username1"]
 
