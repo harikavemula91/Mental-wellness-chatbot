@@ -106,3 +106,20 @@ def main():
 if __name__ == '__main__':
     main()
 
+emotion_templates = {
+    "sadness": "I'm really sorry you're feeling sad. You're not alone. Would you like to talk more?",
+    "joy": "That's wonderful to hear! Celebrate these good moments!",
+    "anger": "It's okay to feel angry sometimes. Let's try some deep breaths.",
+    "fear": "Feeling scared is natural. You're safe here — let's work through this together.",
+    "surprise": "That must have been unexpected! How do you feel about it now?",
+    "love": "Love is such a powerful emotion. Cherish it and let it guide your actions."
+}
+
+def generate_template_response(emotion):
+    return emotion_templates.get(emotion.lower(), "I'm here for you. Please tell me more.")
+
+emotion = detect_emotion(user_input)
+bot_reply = generate_response_with_gpt(user_input, emotion)  # Or gpt2 / template
+
+st.write("🤖", bot_reply)
+st.markdown(f"**Detected Emotion:** `{emotion}`")
