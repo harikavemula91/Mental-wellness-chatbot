@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import joblib
 import altair as alt
+from transformers import pipeline
 
 # --- User Auth System ---
 if "users" not in st.session_state:
@@ -41,20 +42,15 @@ if not st.session_state["authenticated"]:
                 st.session_state["users"][new_username] = new_password
                 st.success("Account created! Please go to the Login page.")
 
-# --- Emotion Templates ---
-emotion_templates = {
-    "sadness": "I'm really sorry you're feeling sad. You're not alone. Would you like to talk more?",
-    "joy": "That's wonderful to hear! Celebrate these good moments!",
-    "anger": "It's okay to feel angry sometimes. Let's try some deep breaths.",
-    "fear": "Feeling scared is natural. You're safe here — let's work through this together.",
-    "surprise": "That must have been unexpected! How do you feel about it now?",
-    "love": "Love is such a powerful emotion. Cherish it and let it guide your actions."
-}
+# --- Load Generative Model for Responses ---
+generator = pipeline("text-generation", model="gpt2")
 
-def generate_template_response(emotion):
-    return emotion_templates.get(emotion.lower(), "I'm here for you. Please tell me more.")
+def generate_dynamic_response(user_input, emotion):
+    prompt = f"User feels {emotion}. Provide a comforting, supportive message: {user_input}\nResponse:"
+    result = generator(prompt, max_length=100, do_sample=True, temperature=0.7)[0]
+    return result['generated_text'].split("Response:")[-1].strip()
 
-# --- Load Model ---
+# --- Load Emotion Classifier ---
 pipe_lr = joblib.load(open("text_emotion.pkl", "rb"))
 emotions_emoji_dict = {
     "anger": "😠", "fear": "😨😱", "joy": "😂",
@@ -92,9 +88,9 @@ if st.session_state["authenticated"]:
             st.write(f"{prediction}: {emoji_icon}")
             st.write(f"Confidence: {np.max(probability):.2f}")
 
-            # Show emotion-based response
+            # Show generative response
             st.subheader("🧠 Supportive Response")
-            st.write(generate_template_response(prediction))
+            st.write(generate_dynamic_response(user_input, prediction))
 
         with col2:
             st.success("Prediction Probability")
