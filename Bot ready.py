@@ -8,6 +8,7 @@ import altair as alt
 if "users" not in st.session_state:
     st.session_state["users"] = {
         "harika": "12345",
+        "Venu": "12345",
         "admin": "admin123"
     }
 
