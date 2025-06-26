@@ -1,6 +1,7 @@
 """# Frontend deployment using Streamlit"""
 
 import streamlit as st
+import numpy as np
 
 # --- Setup a basic user store (in memory for now) ---
 if "users" not in st.session_state:
