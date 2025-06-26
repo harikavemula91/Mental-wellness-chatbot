@@ -44,12 +44,32 @@ if not st.session_state["authenticated"]:
 
 # --- Template-Based Response Fallback ---
 emotion_templates = {
-    "sadness": "I'm really sorry you're feeling sad. You're not alone. Would you like to talk more?",
-    "joy": "That's wonderful to hear! Celebrate these good moments!",
-    "anger": "It's okay to feel angry sometimes. Let's try some deep breaths.",
-    "fear": "Feeling scared is natural. You're safe here — let's work through this together.",
-    "surprise": "That must have been unexpected! How do you feel about it now?",
-    "love": "Love is such a powerful emotion. Cherish it and let it guide your actions."
+    "sadness": (
+        "I'm really sorry you're feeling sad. You're not alone. "
+        "💡 Try journaling your thoughts or taking a short walk.\n\n"
+        "🧘 *Calming Tip:* Breathe in for 4 seconds, hold for 4, exhale for 6.\n"
+    ),
+    "joy": (
+        "That's wonderful to hear! 🎉 Celebrate this moment.\n\n"
+        "💡 Keep a gratitude note to revisit on tough days."
+    ),
+    "anger": (
+        "It's okay to feel angry. 😤 You're human.\n\n"
+        "🧘 *Try this:* Breathe in deeply and count to 4, exhale slowly to 8.\n"
+        "💡 Take a break and journal your thoughts to cool down."
+    ),
+    "fear": (
+        "Feeling scared is natural. 🛡️ You're in a safe space here.\n\n"
+        "💡 Try grounding: Name 5 things you can see, 4 you can touch, 3 you hear, 2 you smell, 1 you taste."
+    ),
+    "surprise": (
+        "That must have been unexpected! 😲\n\n"
+        "💡 Give yourself a moment to process what happened. It’s okay to pause and reflect."
+    ),
+    "love": (
+        "Love is a beautiful and powerful emotion. 💖\n\n"
+        "💡 Express it thoughtfully. A simple thank you or message can deepen connections."
+    )
 }
 
 def generate_template_response(emotion):
