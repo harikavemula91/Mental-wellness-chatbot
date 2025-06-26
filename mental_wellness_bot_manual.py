@@ -86,7 +86,7 @@ def main():
 
             st.success("Prediction")
             emoji_icon = emotions_emoji_dict[prediction]
-            st.write("{}:{}".format(prediction,"emoji_icon"))
+            st.write("{}:{}".format(prediction, emoji_icon))
             st.write("Confidence:{}".format(np.max(probability)))
 
         with col2:
