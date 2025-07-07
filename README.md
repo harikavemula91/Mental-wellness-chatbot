@@ -17,6 +17,7 @@ Users log in, write entries, receive feedback, and track their mood over time �
 •	Journaling + analytics with pie charts and trends
 •	Cloud deployment using GitHub + Streamlit Cloud
 Login page:
+![image](https://github.com/user-attachments/assets/c76d4392-5ba6-430b-a03f-6a8a5e1929a0)
 ![image](https://github.com/user-attachments/assets/3bdececa-5284-496d-8130-f191b2ca5082)
 ![image](https://github.com/user-attachments/assets/3bdececa-5284-496d-8130-f191b2ca5082)
 
